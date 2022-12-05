@@ -4,7 +4,7 @@
     <meta charset="UTS-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>practise</title>
+    <title>test</title>
     
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" 
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" 
@@ -14,15 +14,108 @@
     rel="stylesheet" 
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
     crossorigin="anonymous">
-    
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
 </head>
 <body>
 
-  <h4>테스트입니다.</h4>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" style="font-weight: bold;">10조</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <h1 class="text-center mt-3">Sparta Apartment Free Board!</h1>
+
+  <table class="table table-hover table-striped text-center container mt-3">
+    <thead class="table-danger">
+      <tr>
+        <th>번호</th>
+        <th>글쓴이</th>
+        <th>내용</th>
+        <th>비고</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- <tr>
+        <th id="id">번호</th>
+        <th id="name">글쓴이</th>
+        <th id="comment">내용</th>
+        <th id="note">비고</th>
+      </tr> -->
+
+      {% for i in data_list %}
+      <tr>
+        <td>{{ i[0] }}</td>
+        <td>{{ i[1] }}</td>
+        <td>{{ i[2] }}</td>
+        <td>{{ i[3] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <hr class="container">
+
+  <div class="container post-write w-50">
+    <form>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label mt-3">이름</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">내용</label>
+        <input type="text" class="form-control" id="exampleInputPassword1">
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-primary col-2">Submit</button>
+        <button type="button" class="btn btn-danger col-2 float-end close">Close</button>
+      </div>
+    </form>
+  </div>
+
+  <div>
+    <ul class="pagination justify-content-center">
+      <li><a href="#" style="margin-right: 5px;" class="text-secondary">◀</a></li>
+      <li><a href="#" style="margin-right: 5px;" class="text-secondary">1</a></li>
+      <li><a href="#" style="margin-right: 5px;" class="text-secondary">2</a></li>
+      <li><a href="#" style="margin-right: 5px;" class="text-secondary">3</a></li>
+      <li><a href="#" style="margin-right: 5px;" class="text-secondary">4</a></li>
+      <li><a href="#" style="margin-right: 5px;" class="text-secondary">5</a></li>
+      <li><a href="#" style="margin-right: 5px;" class="text-secondary">▶</a></li>
+    </ul>
+  </div>
+
+  <div class="container btn-write">
+    <a class="btn btn-outline-dark float-end">글쓰기</a>
+  </div>
+  
   <script>
 
-    
+    $('.btn-write').on('click', () =>  $('.post-write').fadeIn(1000) )
+
+    $('.close').on('click', () => $('.post-write').fadeOut(1000) )
 
   </script>
 

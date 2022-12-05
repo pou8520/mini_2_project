@@ -1,0 +1,20 @@
+body {
+  background-image: linear-gradient(to right, #FFF0F5, #E6E6FA);
+
+  font-family: fantasy;
+}
+
+a {
+  text-decoration-line: none;
+
+  font-family: serif;
+}
+
+.post-write {
+  font-family: sans-serif;
+  background-color: white;
+  height: 250px;
+  border-radius: 15px;
+
+  display: none;
+}
