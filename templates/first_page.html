@@ -41,7 +41,7 @@
         display: inline-block;
     }
 
-    form input {
+    div input {
         display: block;
         margin-bottom: 20px;
         border: 1px solid #E5E9F5;
@@ -125,24 +125,23 @@
         <div id="form_inbox">
             <!-- 로그인 페이지 -->
             <div id="form_login">
+                <div>
+                    <input type="text" name="username" id="username_0" placeholder="이름">
 
-                <form>
-                    <input type="text" name="username" id="username" placeholder="이메일">
-
-                    <input type="password" name="password" id="password" placeholder="비밀번호">
+                    <input type="password" name="password" id="password_0" placeholder="비밀번호">
 
                     <div id="btn_1">
-                        <button type="submit">로그인</button>
+                        <button type="submit" onclick="login_click()">로그인</button>
                         <div class='solid_line'></div>
                         <button type="button" id="toggleSignUp">회원가입</button>
                     </div>
-                </form>
+                </div>
             </div>
 
             <!-- 회원가입 페이지 -->
             <div id="form_signup" class="hide">
                 <h3>회원가입</h3>
-                <form>
+                <div>
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" placeholder="Name">
 
@@ -153,20 +152,25 @@
                     <input type="password" name="password" id="password"
                         placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
 
+                    <label for="password">Re Password</label>
+                    <input type="password" name="password" id="re_password"
+                        placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+
                     <div id="btn_1">
-                        <button type="submit" onclick="signup_click()">회원가입</button><br>
+                        <button type="button" onclick="signup_click()"
+                            style="background-color:#80a4ff">회원가입</button><br>
                         <button type="button" id="toggleSignIn">로그인</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
     <script>
         const signInBtn = document.querySelector('#toggleSignIn');
         const signUpBtn = document.querySelector('#toggleSignUp');
-
         const signUpForm = document.querySelector('#form_signup');
         const signInForm = document.querySelector('#form_login');
+
 
         // 버튼 클릭시 폼 변경
         const changeForm = (form1, form2) => {
@@ -174,9 +178,27 @@
             form2.classList.toggle('hide');
         }
 
-        function signup_click(){
-            alert("회원가입 완료")
+        // 회원가입 페이지 회원가입 버튼 클릭시
+        function signup_click() {
+            const name = document.querySelector('#name')
+            const email = document.querySelector('#email')
+            const pw = document.querySelector('#password')
+            const r_pw = document.querySelector('#re_password')
+
+            if (name.value == "" || email.value == "" || pw.value === "" || r_pw.value == "") {
+                alert("빈칸을 입력해주세요")
+            }
+            else {
+                if (pw.value !== r_pw.value) {
+                    alert("비밀번호를 확인해주세요")
+                }
+                else {
+                    alert("회원가입 완료")
+                    window.location.reload()
+                }
+            }
         }
+
         // 로그인 페이지 보여주기
         signInBtn.addEventListener('click', () => {
             changeForm(form_signup, form_login);
@@ -187,7 +209,21 @@
             changeForm(form_signup, form_login);
         });
 
-        </script>
+        // 로그인 버튼 클릭시 메인페이지 이동
+        function login_click() {
+            const user_name = document.querySelector('#username_0')
+            const user_password = document.querySelector('#password_0')
+
+            if (user_name.value == "" || user_password.value == "") {
+                alert("빈칸을 입력해주세요")
+            }
+            else {
+                alert("로그인 성공")
+                // location.href = 
+            }
+        }
+
+    </script>
 </body>
 
 </html>
