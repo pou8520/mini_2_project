@@ -15,7 +15,10 @@ cursor = db.cursor()
 
 @app.route("/")
 def index():
-  return render_template('index.html')
+  sql = '''SELECT id FROM test_table'''
+  cursor.execute(sql)
+  data_id = cursor.fetchall()
+  return render_template('index.html', data_id = data_id)
 
 # GET 구현
 @app.route("/comment", methods=["GET"])
@@ -31,11 +34,21 @@ def comment_post():
   name_receive = request.form['name_give']
   comment_receive = request.form['comment_give']
   print(name_receive)
-  sql =f'''INSERT INTO test_table(name, comment, note)
-        VALUES('{name_receive}', '{comment_receive}', '비고');'''
+  sql =f'''INSERT INTO test_table(name, comment)
+        VALUES('{name_receive}', '{comment_receive}');'''
   cursor.execute(sql)
   db.commit()
-  return jsonify({'msg':'댓글 입력 완료!'})
+  return jsonify({'msg':'게시글 입력 완료!'})
+
+# DELETE 구현
+@app.route("/delete", methods=["DELETE"])
+def comment_delete():
+  id_receive = request.form['id']
+  sql = f'''DELETE FROM test_table
+            WHERE id = {id_receive};'''
+  cursor.execute(sql)
+  db.commit()
+  return jsonify({'msg':'게시글 삭제!'})
 
 
 if __name__ == '__main__':

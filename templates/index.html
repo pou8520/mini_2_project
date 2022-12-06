@@ -103,14 +103,14 @@
   <div class="container btn-write">
     <a class="btn btn-outline-dark float-end">글쓰기</a>
   </div>
-  
+
   <script>
 
     $(document).ready(function () {
       reload_comment();
     });
 
-    // GET - 댓글 불러오기
+    // GET - 게시글 불러오기
     function reload_comment() {
         $.ajax({
             type: "GET",
@@ -124,18 +124,36 @@
                     let comment = doc[i][2]
                     let note = doc[i][3]
                     let 템플릿 = `<tr>
-                                  <th>${id}</th>
-                                  <th>${name}</th>
-                                  <th>${comment}</th>
-                                  <th>${note}</th>
+                                  <td>${id}</td>
+                                  <td>${name}</td>
+                                  <td>${comment}</td>
+                                  <td><button type="button" class="btn btn-warning delete" data-id="${id}">삭제</button></td>
                                 </tr>`
                     $('#comment-list').append(템플릿)
+
+
+                    // DELETE - 게시글 삭제하기 --------------------
+                    $('.delete').on('click', function(e) {
+                      let 글번호 = e.target.dataset.id
+
+                      $.ajax({
+                        method : 'DELETE',
+                        url : '/delete',
+                        data : { id : 글번호 },
+                        success: function (response) {
+                            alert(response['msg'])
+                            window.location.reload()
+                        }
+                      })
+                    })
+                    //------------------------------------------
+
                 }
             }
         });
     }
 
-    // POST - 댓글 저장하기
+    // POST - 게시글 저장하기
     function save_comment() {
       let name = $('#name').val()
       let comment = $('#comment').val()
