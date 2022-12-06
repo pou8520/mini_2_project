@@ -18,3 +18,14 @@ a {
 
   display: none;
 }
+
+.post-correction {
+  font-family: sans-serif;
+  background-color: white;
+  border-radius: 15px;
+  height: 150px;
+
+  padding-top: 20px;
+
+  display: none;
+}

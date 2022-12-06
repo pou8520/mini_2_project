@@ -89,6 +89,18 @@
     </form>
   </div>
 
+  <div class="container post-correction w-75">
+    <form>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="correction-comment" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">내용을 수정하세요.</div>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-danger float-end correction-close">닫기</button>
+      </div>
+    </form>
+  </div>
+
   <div>
     <ul class="pagination justify-content-center">
       <li><a href="#" style="margin-right: 5px;" class="text-secondary">◀</a></li>
@@ -105,6 +117,9 @@
     <a class="btn btn-outline-dark float-end">글쓰기</a>
   </div>
 
+  <div class="container">
+    <a class="btn btn-warning correction-show" style="color: white; font-weight: bold;">글 수정하기</a>
+  </div>
 
   <script>
 
@@ -128,8 +143,8 @@
                                   <td>${id}</td>
                                   <td>${name}</td>
                                   <td>${comment}</td>
-                                  <td><button type="button" class="btn btn-danger delete btn-size" data-id="${id}" style="height: 35px;">삭제</button></td>
-                                  <td><button type="button" class="btn btn-warning btn-size" style="height: 35px;">수정</button></td>
+                                  <td><button type="button" class="btn btn-danger delete" data-id="${id}" style="height: 35px;">삭제</button></td>
+                                  <td><button type="button" class="btn btn-warning correction" style="height: 35px;" data-id="${id}">수정</button></td>
                                 </tr>`
                     $('#comment-list').append(템플릿)
 
@@ -149,6 +164,27 @@
                       })
                     })
                     //------------------------------------------
+
+
+                    // PUT = 게시글 수정하기 =====================
+                    $('.correction-show').on('click', () => $('.post-correction').fadeIn(1000) ) // 수정 게시판 show
+
+                    $('.correction-close').on('click', () => $('.post-correction').fadeOut(1000) ) // 수정 게시판 hide
+
+                    $('.correction').on('click', function(e) {
+                      let 글번호 = e.target.dataset.id
+                      let correction = $('#correction-comment').val()
+
+                      $.ajax({
+                        method : 'PUT',
+                        url : '/put',
+                        data : { id : 글번호, correction_give : correction },
+                        success: function (response) {
+                            alert(response['msg'])
+                            window.location.reload()
+                        }
+                      })
+                    })
 
                 }
             }

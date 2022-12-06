@@ -65,6 +65,27 @@ def comment_delete():
   db.close()
   return jsonify({'msg':'게시글 삭제!'})
 
+# PUT 구현
+@app.route("/put", methods=["PUT"])
+def comment_put():
+  db = pymysql.connect( host='secendproj.cczokkdg0lti.ap-northeast-1.rds.amazonaws.com',
+                      port=3306,
+                      user='admin',
+                      passwd='roqkfwkehlrhtlqwh',
+                      db='2_project',
+                      charset='utf8')
+  cursor = db.cursor()
+
+  id_receive = request.form['id']
+  correction_receive = request.form['correction_give']
+  sql = f'''UPDATE board
+            SET comment = '{correction_receive}'
+            WHERE id = {id_receive};'''
+  cursor.execute(sql)
+
+  db.commit()
+  db.close()
+  return jsonify({'msg':'게시글 수정 완료!'})
 
 if __name__ == '__main__':
   app.run('0.0.0.0', port=5000, debug=True)
