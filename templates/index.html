@@ -53,7 +53,8 @@
         <th>번호</th>
         <th>글쓴이</th>
         <th>내용</th>
-        <th>비고</th>
+        <th>삭제</th>
+        <th>수정</th>
       </tr>
     </thead>
 
@@ -82,7 +83,7 @@
         <input type="text" class="form-control" id="comment">
       </div>
       <div class="col">
-        <button onclick="save_comment()" type="submit" class="btn btn-primary col-2" >Submit</button>
+        <button onclick="save_comment()" type="button" class="btn btn-primary col-2" >Submit</button>
         <button type="button" class="btn btn-danger col-2 float-end close">Close</button>
       </div>
     </form>
@@ -104,6 +105,7 @@
     <a class="btn btn-outline-dark float-end">글쓰기</a>
   </div>
 
+
   <script>
 
     $(document).ready(function () {
@@ -122,12 +124,12 @@
                     let id = doc[i][0]
                     let name = doc[i][1]
                     let comment = doc[i][2]
-                    let note = doc[i][3]
                     let 템플릿 = `<tr>
                                   <td>${id}</td>
                                   <td>${name}</td>
                                   <td>${comment}</td>
-                                  <td><button type="button" class="btn btn-warning delete" data-id="${id}">삭제</button></td>
+                                  <td><button type="button" class="btn btn-danger delete btn-size" data-id="${id}" style="height: 35px;">삭제</button></td>
+                                  <td><button type="button" class="btn btn-warning btn-size" style="height: 35px;">수정</button></td>
                                 </tr>`
                     $('#comment-list').append(템플릿)
 
@@ -157,6 +159,7 @@
     function save_comment() {
       let name = $('#name').val()
       let comment = $('#comment').val()
+
       $.ajax({
           type: 'POST',
           url: '/save_comment',
