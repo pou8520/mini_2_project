@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>mypage</title>
+
+<script>
+$(document).ready(function () {
+      reload_comment();
+    });
+
+    // GET - 댓글 불러오기
+    function reload_comment() {
+        $.ajax({
+            type: "GET",
+            url: "/comment",
+            data: {},
+            success: function (response) {
+                doc = response['data_list']
+                for (let i = 0; i < doc.length; i++) {
+                    let id = doc[i][0]
+                    let name = doc[i][1]
+                    let email = doc[i][2]
+                    let introduction = doc[i][3]
+                    let 템플릿 = `<tr>
+                                  <th>${id}</th>
+                                  <th>${name}</th>
+                                  <th>${email}</th>
+                                  <th>${introduction}</th>
+                                </tr>`
+                    $('#comment-list').append(템플릿)
+                }
+            }
+        });
+    }
+
+    // POST - 댓글 저장하기
+    function save_comment() {
+      let name = $('#name').val()
+      let comment = $('#comment').val()
+      $.ajax({
+          type: 'POST',
+          url: '/save_comment',
+          data: {name_give: name, comment_give: comment},
+          success: function (response) {
+              alert(response['msg'])
+              window.location.reload()
+          }
+      })
+    }
+
+
+
+</script>
+
+</head>
+<body>
+<div id = comment_list>
+
+</div>
+<textarea></textarea>
+<button>update profile</button>
+
+</body>
+</html>
