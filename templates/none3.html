@@ -14,7 +14,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Diplomata+SC&family=Satisfy&display=swap');
     </style>
-    <link rel="stylesheet" href="static\styles\main.css">
+    <link rel="stylesheet" href="static\styles\nonebtns.css">
     <title></title>
     <style>
         body {
@@ -155,10 +155,6 @@
             border-radius: 20px;
             border: 0
         }
-
-        .hide {
-            display: none !important;
-        }
     </style>
 </head>
 
@@ -186,10 +182,10 @@
     </header>
     <div class="background_form">
         <div class="btn_form">
-            <button onclick="window.location.href='/none1'" class="changeForm_01" type="button" id="togglenone_1">none</button>
-            <button onclick="window.location.href='/none2'" type="button" id="togglenone_2">none</button>
-            <button onclick="window.location.href='/none3'" type="button" id="togglenone_3">none</button>
-            <button onclick="window.location.href='/none4'" type="button" id="togglenone_4">none</button>
+            <button onclick="btn_1();window.location.href=" class="changeForm_01" type="button" id="togglenone_1">none</button>
+            <button onclick="btn_2()" type="button" id="togglenone_2">none</button>
+            <button onclick="btn_3()" type="button" id="togglenone_3">none</button>
+            <button onclick="btn_4()" type="button" id="togglenone_4">none</button>
 
         </div>
         <div class='test'>
@@ -197,12 +193,6 @@
             <p>Welcome to Class B 10 Team Project</p> -->
         </div>
 
-        <div id="interface_form" class="hide">
-        </div>
-        <div id="interface_form" class="hide">
-        </div>
-        <div id="interface_form" class="hide">
-        </div>
         <div id="interface_form" class="hide">
         </div>
 

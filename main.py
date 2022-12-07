@@ -22,6 +22,22 @@ app.secret_key = 'your secret key'
 def login_page():
     return render_template('login.html')
 
+@app.route('/none1')
+def none1_page():
+    return render_template('none1.html')
+
+@app.route('/none2')
+def none2_page():
+    return render_template('none2.html')
+
+@app.route('/none3')
+def none3_page():
+    return render_template('none3.html')
+
+@app.route('/none4')
+def none4_page():
+    return render_template('none4.html')
+
 
 @app.route('/signup')
 def signup_page():
