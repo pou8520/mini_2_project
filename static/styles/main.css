@@ -1,6 +1,9 @@
 body {
     margin: 0;
-    overflow: hidden;
+    padding: 0;
+    overflow: auto;
+    overflow-x: hidden;
+
 }
 
 /* header,nav css */
@@ -12,8 +15,10 @@ header {
     padding: 10px;
     letter-spacing: 0.1rem;
     font-style: italic;
-    background: rgb(255, 255, 255);
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(231, 250, 255, 1) 0%, rgba(98, 211, 252, 1) 100%);
+    /* background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(231, 250, 255, 1) 0%, rgba(98, 211, 252, 1) 100%); */
+    background-color: rgba(221, 224, 224, 0.815);
+
 }
 
 header a {
@@ -59,9 +64,10 @@ ul {
     /* background-color: rgb(101, 101, 101); */
     width: 100vw;
     height: 100vh;
-    background-image: url('https://cdn.pixabay.com/photo/2016/04/18/14/52/buildings-1336611_960_720.jpg');
+    background-image: url("https://img.freepik.com/free-photo/central-business-district-in-singapore_335224-642.jpg?size=626&ext=jpg&ga=GA1.2.93319971.1670399783");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    opacity: 0.65;
 }
 
 .btn_form {
@@ -71,9 +77,9 @@ ul {
 }
 
 .btn_form button {
-    color: white;
-    background-color: #a7d1f6;
-    margin-right: 10px;
+    color: rgb(0, 0, 0);
+    background-color: transparent;
+    /* margin-right: 10px; */
     border: 0;
     outline: 0;
     padding: 20px;
@@ -82,26 +88,30 @@ ul {
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: 600;
+    font-size: 30px
 }
 
 .btn_form button:hover {
-    background-color: #dcf8ff
+    color: red;
 }
 
-/* footer css */
+ /* footer css  */
 footer {
     display: flex;
     background-color: black;
     color: white;
     width: 100%;
     height: 10vh;
-    /* 내용물에 따라 알맞는 값 설정 */
     bottom: 0px;
-    position: absolute;
+    /* position: absolute; */
     justify-content: center;
     align-items: center;
     align-content: center;
     flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
 }
 
 .footer nav {
@@ -115,30 +125,13 @@ footer {
     justify-content: center;
     background-color: white;
     margin: auto;
-    width: 90%;
+    width: 95%;
     height: 70%;
     border-radius: 20px;
     border: 0
 }
 
-.hide {
+/* .hide {
     display: none !important;
-}
+} */
 
-.test {
-    width: 300px;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    font-size:50px;
-    color:white;
-    position:absolute;
-    left:50%;
-    top:50%;
-    margin-left:-150px;
-    margin-top:-150px;
-    
-    
-}
