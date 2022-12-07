@@ -130,6 +130,28 @@ footer {
     border-radius: 20px;
     border: 0
 }
+.first {
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row; /*수평 정렬*/
+    align-items: center;
+    justify-content: center;
+}
+.second{
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row; /*수평 정렬*/
+    align-items: center;
+    justify-content: center;
+}
+.one{
+    width: 300px;
+    height: 200px;
+    background: #0054FF;
+    margin: 50px;
+}
 
 /* .hide {
     display: none !important;

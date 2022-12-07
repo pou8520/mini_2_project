@@ -99,7 +99,28 @@
     .hide {
         display: none !important;
     }
-
+    .first {
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row; /*수평 정렬*/
+        align-items: center;
+        justify-content: center;
+    }
+    .second{
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row; /*수평 정렬*/
+        align-items: center;
+        justify-content: center;
+    }
+    .one{
+        width: 60px;
+        height: 60px;
+        background: #0054FF;
+        margin: 10px;
+    }
     .solid_line {
         align-items: center;
         border-bottom: 1px solid #000000;
