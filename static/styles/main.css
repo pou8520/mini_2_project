@@ -3,7 +3,10 @@ body {
     padding: 0;
     overflow: auto;
     overflow-x: hidden;
-
+    background-image: url("https://img.freepik.com/free-photo/central-business-district-in-singapore_335224-642.jpg?size=626&ext=jpg&ga=GA1.2.93319971.1670399783");
+    background-repeat: repeat-y;
+    background-size: 100% 100%;
+    background-attachment: fixed;
 }
 
 /* header,nav css */
@@ -16,8 +19,9 @@ header {
     letter-spacing: 0.1rem;
     font-style: italic;
     /* background: rgb(255, 255, 255);
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(231, 250, 255, 1) 0%, rgba(98, 211, 252, 1) 100%); */
+background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(231, 250, 255, 1) 0%, rgba(98, 211, 252, 1) 100%); */
     background-color: rgba(221, 224, 224, 0.815);
+
 
 }
 
@@ -64,10 +68,11 @@ ul {
     /* background-color: rgb(101, 101, 101); */
     width: 100vw;
     height: 100vh;
-    background-image: url("https://img.freepik.com/free-photo/central-business-district-in-singapore_335224-642.jpg?size=626&ext=jpg&ga=GA1.2.93319971.1670399783");
-    background-repeat: no-repeat;
+    /* background-image: url("https://img.freepik.com/free-photo/central-business-district-in-singapore_335224-642.jpg?size=626&ext=jpg&ga=GA1.2.93319971.1670399783");
+    background-repeat: repeat-y; 
     background-size: 100% 100%;
-    opacity: 0.65;
+    background-attachment: fixed; */
+
 }
 
 .btn_form {
@@ -95,7 +100,7 @@ ul {
     color: red;
 }
 
- /* footer css  */
+/* footer css  */
 footer {
     display: flex;
     background-color: black;
@@ -125,6 +130,7 @@ footer {
     justify-content: center;
     background-color: white;
     margin: auto;
+    margin-bottom: 20px;
     width: 95%;
     height: 70%;
     border-radius: 20px;
@@ -134,4 +140,3 @@ footer {
 /* .hide {
     display: none !important;
 } */
-
