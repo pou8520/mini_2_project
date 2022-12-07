@@ -104,12 +104,12 @@
   <div>
     <ul class="pagination justify-content-center">
       <li><a href="#" style="margin-right: 5px;" class="text-secondary">◀</a></li>
-      <li><a href="#" style="margin-right: 5px;" class="text-secondary">1</a></li>
-      <li><a href="#" style="margin-right: 5px;" class="text-secondary">2</a></li>
-      <li><a href="#" style="margin-right: 5px;" class="text-secondary">3</a></li>
-      <li><a href="#" style="margin-right: 5px;" class="text-secondary">4</a></li>
-      <li><a href="#" style="margin-right: 5px;" class="text-secondary">5</a></li>
-      <li><a href="#" style="margin-right: 5px;" class="text-secondary">▶</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary" id="page-1">1</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary" id="page-2">2</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary" id="page-3">3</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary" id="page-4">4</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary" id="page-5">5</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary">▶</a></li>
     </ul>
   </div>
 
@@ -123,18 +123,49 @@
 
   <script>
 
-    $(document).ready(function () {
-      reload_comment();
-    });
+    // 페이지 시작, 새로고침 시 작동 --------------------
+    $(document).ready( () => { 
+      let pagenumber = localStorage.getItem('pagenumber')
+      if(!pagenumber) {
+        reload_comment(1)
+      }
+      reload_comment(parseInt(pagenumber))
+    })
+    //---------------------------------------------
+
+    // 버튼 클릭 시 값을 localstorage 변수에 저장 ------------------------
+    $('#page-1').on('click', () => {
+      localStorage.setItem('pagenumber', 1)
+      reload_comment(1)
+    })
+    $('#page-2').on('click', () => {
+      localStorage.setItem('pagenumber', 2)
+      reload_comment(2)
+    })
+    $('#page-3').on('click', () => {
+      localStorage.setItem('pagenumber', 3)
+      reload_comment(3)
+    })
+    $('#page-4').on('click', () => {
+      localStorage.setItem('pagenumber', 4)
+      reload_comment(4)
+    })
+    $('#page-5').on('click', () => {
+      localStorage.setItem('pagenumber', 5)
+      reload_comment(5)
+    })
+    //----------------------------------------------------------------
 
     // GET - 게시글 불러오기
-    function reload_comment() {
+    function reload_comment(parameter) {
         $.ajax({
             type: "GET",
-            url: "/comment",
+            url: `/comment/${parameter}`,
             data: {},
             success: function (response) {
                 doc = response['data_list']
+                $('#comment-list').empty()
+
                 for (let i = 0; i < doc.length; i++) {
                     let id = doc[i][0]
                     let name = doc[i][1]
@@ -147,7 +178,6 @@
                                   <td><button type="button" class="btn btn-warning correction" style="height: 35px;" data-id="${id}">수정</button></td>
                                 </tr>`
                     $('#comment-list').append(템플릿)
-
 
                     // DELETE - 게시글 삭제하기 --------------------
                     $('.delete').on('click', function(e) {
@@ -165,8 +195,7 @@
                     })
                     //------------------------------------------
 
-
-                    // PUT = 게시글 수정하기 =====================
+                    // PUT = 게시글 수정하기 ----------------------
                     $('.correction-show').on('click', () => $('.post-correction').fadeIn(1000) ) // 수정 게시판 show
 
                     $('.correction-close').on('click', () => $('.post-correction').fadeOut(1000) ) // 수정 게시판 hide

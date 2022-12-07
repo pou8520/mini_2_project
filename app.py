@@ -7,17 +7,32 @@ def index():
   return render_template('index.html')
 
 # GET 구현
-@app.route("/comment", methods=["GET"])
-def comment_get():
+@app.route("/comment/<int:page_id>", methods=["GET"])
+def comment_get(page_id):
   db = pymysql.connect( host='secendproj.cczokkdg0lti.ap-northeast-1.rds.amazonaws.com',
-                      port=3306,
-                      user='admin',
-                      passwd='roqkfwkehlrhtlqwh',
-                      db='2_project',
-                      charset='utf8')
+                        port=3306,
+                        user='admin',
+                        passwd='roqkfwkehlrhtlqwh',
+                        db='2_project',
+                        charset='utf8')
   cursor = db.cursor()
 
-  sql = '''SELECT * FROM board'''
+  if page_id == 1:
+    sql =  '''SELECT * FROM pagination
+              LIMIT 10 OFFSET 0;'''
+  if page_id == 2:
+    sql =  '''SELECT * FROM pagination
+              LIMIT 10 OFFSET 10;'''
+  if page_id == 3:
+    sql =  '''SELECT * FROM pagination
+              LIMIT 10 OFFSET 20;'''
+  if page_id == 4:
+    sql =  '''SELECT * FROM pagination
+              LIMIT 10 OFFSET 30;'''
+  if page_id == 5:
+    sql =  '''SELECT * FROM pagination
+              LIMIT 10 OFFSET 40;'''
+
   cursor.execute(sql)
   data_list = cursor.fetchall()
 
@@ -28,16 +43,16 @@ def comment_get():
 @app.route("/save_comment", methods=["POST"])
 def comment_post():
   db = pymysql.connect( host='secendproj.cczokkdg0lti.ap-northeast-1.rds.amazonaws.com',
-                      port=3306,
-                      user='admin',
-                      passwd='roqkfwkehlrhtlqwh',
-                      db='2_project',
-                      charset='utf8')
+                        port=3306,
+                        user='admin',
+                        passwd='roqkfwkehlrhtlqwh',
+                        db='2_project',
+                        charset='utf8')
   cursor = db.cursor()
 
   name_receive = request.form['name_give']
   comment_receive = request.form['comment_give']
-  sql = f'''INSERT INTO board(name, comment)
+  sql = f'''INSERT INTO pagination(name, comment)
             VALUES('{name_receive}', '{comment_receive}');'''
   cursor.execute(sql)
 
@@ -49,15 +64,15 @@ def comment_post():
 @app.route("/delete", methods=["DELETE"])
 def comment_delete():
   db = pymysql.connect( host='secendproj.cczokkdg0lti.ap-northeast-1.rds.amazonaws.com',
-                      port=3306,
-                      user='admin',
-                      passwd='roqkfwkehlrhtlqwh',
-                      db='2_project',
-                      charset='utf8')
+                        port=3306,
+                        user='admin',
+                        passwd='roqkfwkehlrhtlqwh',
+                        db='2_project',
+                        charset='utf8')
   cursor = db.cursor()
 
   id_receive = request.form['id']
-  sql = f'''DELETE FROM board
+  sql = f'''DELETE FROM pagination
             WHERE id = {id_receive};'''
   cursor.execute(sql)
 
@@ -69,16 +84,16 @@ def comment_delete():
 @app.route("/put", methods=["PUT"])
 def comment_put():
   db = pymysql.connect( host='secendproj.cczokkdg0lti.ap-northeast-1.rds.amazonaws.com',
-                      port=3306,
-                      user='admin',
-                      passwd='roqkfwkehlrhtlqwh',
-                      db='2_project',
-                      charset='utf8')
+                        port=3306,
+                        user='admin',
+                        passwd='roqkfwkehlrhtlqwh',
+                        db='2_project',
+                        charset='utf8')
   cursor = db.cursor()
 
   id_receive = request.form['id']
   correction_receive = request.form['correction_give']
-  sql = f'''UPDATE board
+  sql = f'''UPDATE pagination
             SET comment = '{correction_receive}'
             WHERE id = {id_receive};'''
   cursor.execute(sql)
