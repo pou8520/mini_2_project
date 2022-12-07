@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden
+        }
+
+        /* header,nav css */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            padding: 10px;
+            letter-spacing: 0.1rem;
+            font-style: italic;
+        }
+
+        header a {
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            /* background-color:  */
+            border-radius: 100%;
+            border: black;
+        }
+
+        ul {
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 40px;
+        }
+
+        header li {
+            margin-right: 1rem;
+        }
+
+        header ul {
+            display: flex;
+        }
+
+        ol,
+        ul {
+            list-style: none;
+        }
+
+        /* header,nav css 끝 */
+        /* section css*/
+        .background_form {
+            background-color: rgb(101, 101, 101);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .btn_form {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .btn_form button {
+            color: white;
+            background-color: rgba(0, 0, 0, 0);
+            margin-right: 10px;
+            border: 0;
+            outline: 0;
+            padding: 20px;
+        }
+
+        /* footer css */
+        footer {
+            display: flex;
+            background-color: black;
+            color: white;
+            width: 100%;
+            height: 10vh;
+            /* 내용물에 따라 알맞는 값 설정 */
+            bottom: 0px;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            flex-direction: column;
+        }
+
+        .footer nav {
+            margin-top: 10px;
+        }
+
+        .interface_form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            margin: auto;
+            width: 90%;
+            height: 70%;
+            border-radius: 20px;
+            border: 0
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2><a href="index.html" ;>Apartment</a></h2>
+        <div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="index.html" ;>회원정보</a>
+                    </li>
+                    <li>
+                        <a type="button" onclick="logout()" href="index.html" ;>로그아웃</a>
+                    </li>
+                    <!-- <li>
+                    <a href="index.html" ;>none</a>
+                </li> -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="background_form">
+        <div class="btn_form">
+            <button onclick="change01()" id="togglenone_1">none</button>
+            <button onclick="change02()" id="togglenone_2">none</button>
+            <button onclick="change03()" id="togglenone_3">none</button>
+            <button onclick="change04()" id="togglenone_4">none</button>
+        </div>
+        <div class="interface_form">
+            <div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    </div>
+    <footer>
+        <nav>
+            <a href='' target='_blank'>Blog</a> |
+            <a href='' target='_blank'>Github</a>
+        </nav>
+        <p>
+            <span></span><br />
+            <span>Copyright ©2022 second project. All rights reserved.</span>
+        </p>
+    </footer>
+    <script>
+
+    </script>
+</body>
+
+</html>
