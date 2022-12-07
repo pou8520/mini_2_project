@@ -33,8 +33,6 @@ def main_page():
     return render_template('index.html')
 
 # 로그인 기능
-
-
 @app.route('/', methods=['GET', 'POST'])
 def login_btn():
     db = pymysql.connect(host='secendproj.cczokkdg0lti.ap-northeast-1.rds.amazonaws.com', port=3306, user='admin',
@@ -59,7 +57,7 @@ def login_btn():
             session['id'] = account[0]
             session['username'] = account[1]
             msg = '로그인 성공'
-            return render_template('index.html', msg=msg)
+            return render_template('/index.html', msg=msg)
         else:
             msg = '로그인 실패!'
     return render_template('login.html', msg=msg)
