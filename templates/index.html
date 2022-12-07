@@ -76,7 +76,6 @@
         .btn_form button {
             color: white;
             background-color: rgba(0, 0, 0, 0);
-            margin-top: 15px;
             margin-right: 10px;
             border: 0;
             outline: 0;
@@ -103,7 +102,7 @@
             margin-top: 10px;
         }
 
-        .interface_01_form {
+        .interface_form {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -111,9 +110,13 @@
             background-color: white;
             margin: auto;
             width: 90%;
-            height: 70vh;
-            border-radius: 20px; 
-            border:0
+            height: 70%;
+            border-radius: 20px;
+            border: 0
+        }
+
+        .hide {
+            display: none;
         }
     </style>
 </head>
@@ -139,16 +142,21 @@
     </header>
     <div class="background_form">
         <div class="btn_form">
-            <button>none</button>
-            <button>none</button>
-            <button>none</button>
-            <button>none</button>
+            <button onclick="change01()" id="togglenone_1">none</button>
+            <button onclick="change02()" id="togglenone_2">none</button>
+            <button onclick="change03()" id="togglenone_3">none</button>
+            <button onclick="change04()" id="togglenone_4">none</button>
         </div>
-        <div class="interface_01_form">
-            interface_01_form입니다
+        <div class="interface_form">
+            <div>
+
+            </div>
         </div>
     </div>
+    </div>
 
+
+    </div>
     <footer>
         <nav>
             <a href='' target='_blank'>Blog</a> |
@@ -159,6 +167,9 @@
             <span>Copyright ©2022 second project. All rights reserved.</span>
         </p>
     </footer>
+    <script>
+
+    </script>
 </body>
 
 </html>
