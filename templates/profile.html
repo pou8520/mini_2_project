@@ -159,12 +159,14 @@
 
     <script>
         function edit_profile() {
-            let nickname = $('#nickName').val();
+            nickname = $('#new_nickname').val()
             $.ajax({
                 type: 'PUT',
                 url: '/edit_profile',
                 data: {nickname_give: nickname},
                 success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
                 }
             })
         }
@@ -207,14 +209,15 @@
             <a href="/upload">나의 파일 업로드</a><br><br>
             <a href="/download">나의 파일 다운로드</a><br><br>
 
-            <div id="nickName">
-                <input type="text" name ="nickName" id="nickName" value="" title="닉네임" placeholder="{{ nickname }}" maxlength="13">
+            <div id="nickname">
+                <input type="text" id="new_nickname" name="nickname" title="닉네임" placeholder="{{ nickname }}"
+                       maxlength="13">
                 <div class="guide"></div>
             </div>
             <div>
                 <button onclick="edit_profile()">정보 수정</button>
             </div>
-            <div class="second"><a href="javascript:void(0);">
+            <div class="second"><a href="">
                 <button type="button" id="withdraw">회원 탈퇴</button>
             </a></div>
         </div>
