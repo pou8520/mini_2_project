@@ -84,8 +84,9 @@ def login_btn():
             return render_template('/index.html', msg=msg)
         else:
             msg = '로그인 실패!'
+        db.close()
     return render_template('login.html', msg=msg)
-
+    
 # 회원가입 기능
 
 
@@ -105,6 +106,7 @@ def signup_btn_click():
         VALUES('{name_receive}','{nickname_receive}','{email_receive}','{password_receive}');'''
     cursor.execute(sql)
     db.commit()
+    db.close()
     return jsonify({'msg': '회원가입 완료!'})
 
 
