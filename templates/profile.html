@@ -87,11 +87,20 @@
             /* background-color: rgb(101, 101, 101); */
             width: 100vw;
             height: 100vh;
-            /* background-image: url("https://img.freepik.com/free-photo/central-business-district-in-singapore_335224-642.jpg?size=626&ext=jpg&ga=GA1.2.93319971.1670399783");
-            background-repeat: repeat-y;
-            background-size: 100% 100%;
-            background-attachment: fixed; */
+        }
 
+        /* background-image: url("https://img.freepik.com/free-photo/central-business-district-in-singapore_335224-642.jpg?size=626&ext=jpg&ga=GA1.2.93319971.1670399783");
+        background-repeat: repeat-y;
+        background-size: 100% 100%;
+        background-attachment: fixed; */
+
+        .mypic {
+            width: 140px;
+            border-radius: 50%;
+            float: left;
+            position: relative;;
+            display: flex;
+            flex-direction: column;
         }
 
         .btn_form {
@@ -158,18 +167,43 @@
     </style>
 
     <script>
-        function edit_profile() {
-            nickname = $('#new_nickname').val()
+
+        function edit_pic() {
+            password = $('#new_password').val()
             $.ajax({
                 type: 'PUT',
                 url: '/edit_profile',
-                data: {nickname_give: nickname},
+                data: {
+                    nickname_give: nickname,
+                    email_give: email,
+                    password_give: password
+                },
                 success: function (response) {
                     alert(response['msg'])
                     window.location.reload()
                 }
             })
         }
+
+        function edit_profile() {
+            nickname = $('#new_nickname').val()
+            email = $('#new_email').val()
+            password = $('#new_password').val()
+            $.ajax({
+                type: 'PUT',
+                url: '/edit_profile',
+                data: {
+                    nickname_give: nickname,
+                    email_give: email,
+                    password_give: password
+                },
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            })
+        }
+
 
     </script>
 </head>
@@ -209,9 +243,18 @@
             <a href="/upload">나의 파일 업로드</a><br><br>
             <a href="/download">나의 파일 다운로드</a><br><br>
 
-            <div id="nickname">
-                <input type="text" id="new_nickname" name="nickname" title="닉네임" placeholder="{{ nickname }}"
+            <div id="userinfo">
+                <p>닉네임</p>
+                <input type="text" id="new_nickname" name="nickname" title="닉네임" value="{{ nickname }}"
                        maxlength="13">
+                <p>이메일</p>
+                <input type="text" id="new_email" name="email" title="email" value="{{ email }}"
+                       maxlength="13">
+                <p>비밀번호</p>
+                <input type="password" id="new_password" name="password" title="password" value="{{ password }}"
+                       maxlength="13">
+
+
                 <div class="guide"></div>
             </div>
             <div>
