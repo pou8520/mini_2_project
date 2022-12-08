@@ -193,6 +193,19 @@
                 })
             }
         }
+        function delete_account() {
+            $.ajax({
+                    type: 'DELETE',
+                    url: '/delete_account',
+                    success: function (response) {
+                        alert(response['msg'])
+                        window.location.reload()
+
+                    }
+                }
+            )
+        }
+
 
     </script>
 </head>
@@ -223,6 +236,7 @@
 
 
     <div id="interface_form" class="hide">
+
         <div>
             <form action="/main" method="POST">
                 <h1>{{ username }} 님의 프로필 </h1>
@@ -233,6 +247,8 @@
             <a href="/download">나의 파일 다운로드</a><br><br>
 
             <div id="userinfo">
+
+
                 <p>유저네임</p>
                 <p>{{ username }}</p>
                 <p>닉네임</p>
@@ -255,7 +271,7 @@
                 <button onclick="edit_profile()">정보 수정</button>
             </div>
             <div class="second"><a href="">
-                <button type="button" id="withdraw">회원 탈퇴</button>
+                <button onclick="delete_account()">회원 탈퇴</button>
             </a></div>
         </div>
     </div>

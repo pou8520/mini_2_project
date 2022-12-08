@@ -86,6 +86,15 @@ def edit_profile():
 
     return jsonify({'msg': '회원정보 수정 완료!'})
 
+@app.route("/delete_account", methods=["DELETE"])
+def delete_account():
+    userid = session['id']
+    sql = f'''DELETE FROM accounts
+            WHERE id = {userid};'''
+    cursor.execute(sql)
+    db.commit()
+    session.pop('username', None)
+    return jsonify({'msg': '회원탈퇴 완료!'})
 
 @app.route('/none1')
 def none1_page():
@@ -332,4 +341,4 @@ def download_file():
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=5002, debug=True)
