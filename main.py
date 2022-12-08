@@ -232,7 +232,6 @@ def comment_delete():
                          charset='utf8')
     cursor = db.cursor()
 
-
     if "username" in session:      # 로그인 후, 세션안에 유저네임 이 있으면
         aaa = session["id"]             # 해당 유저의 아이디에 따라 생성된 값을 변수에 저장하고
         id_receive = request.form['id'] # 선택한 게시글의 db를 조회하고
