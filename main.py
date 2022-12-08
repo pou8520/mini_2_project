@@ -281,7 +281,7 @@ def comment_put():
 @app.route('/upload')
 def render_file():
     return render_template('upload.html')
-
+#
 
 # 업로드 처리시
 @app.route('/fileUpload', methods=['GET', 'POST'])
