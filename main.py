@@ -23,13 +23,16 @@ app.secret_key = 'your secret key'
 def login_page():
     return render_template('login.html')
 
+
 @app.route('/signup')
 def signup_page():
     return render_template('signup.html')
 
+
 @app.route('/main')
 def main_page():
     return render_template('index.html')
+
 
 @app.route('/none1')
 def none1_page():
@@ -49,11 +52,6 @@ def none3_page():
 @app.route('/none4')
 def none4_page():
     return render_template('none4.html')
-
-
-
-
-
 
 
 # 로그인 기능
