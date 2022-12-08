@@ -23,17 +23,11 @@
     <h2><a href="/main" ;>Apartment</a></h2>
     <div>
       <nav>
-        <ul>
-          <li>
-            <a type="button" id="togglehome" href="/main" ;>홈</a>
-          </li>
-          <li>
-            <a href="index.html" ;>회원정보</a>
-          </li>
-          <li>
-            <a type="button" onclick="logout()" href="/" ;>로그아웃</a>
-          </li>
-        </ul>
+        {% include 'navbar.html' %}
+        <div class ='container'>
+            {% block contetn %}
+            {% endblock %}
+        </div>
       </nav>
     </div>
   </header>
