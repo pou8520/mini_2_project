@@ -23,7 +23,7 @@
             overflow: auto;
             overflow-x: hidden;
             background-image: url("https://img.freepik.com/free-photo/central-business-district-in-singapore_335224-642.jpg?size=626&ext=jpg&ga=GA1.2.93319971.1670399783");
-            background-repeat: repeat-y; 
+            background-repeat: repeat-y;
             background-size: 100% 100%;
             background-attachment: fixed;
         }
@@ -40,7 +40,7 @@
             /* background: rgb(255, 255, 255);
                 background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(231, 250, 255, 1) 0%, rgba(98, 211, 252, 1) 100%); */
             background-color: rgba(221, 224, 224, 0.815);
-            
+
 
         }
 
@@ -91,7 +91,7 @@
             background-repeat: repeat-y; 
             background-size: 100% 100%;
             background-attachment: fixed; */
-           
+
         }
 
         .btn_form {
@@ -160,7 +160,7 @@
 
 <body topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
     <header>
-        <h2><a href="index.html" ;>Apartment</a></h2>
+        <h2><a href="/main" ;>Apartment</a></h2>
         <div>
             <nav>
                 <ul>
@@ -173,27 +173,224 @@
                     <li>
                         <a type="button" onclick="logout()" href="/" ;>로그아웃</a>
                     </li>
-                    <!-- <li>
-                    <a href="index.html" ;>none</a>
-                </li> -->
                 </ul>
             </nav>
         </div>
     </header>
     <div class="background_form">
         <div class="btn_form">
-            <button onclick="btn_1();window.location.href=" class="changeForm_01" type="button" id="togglenone_1">none</button>
-            <button onclick="btn_2()" type="button" id="togglenone_2">none</button>
-            <button onclick="btn_3()" type="button" id="togglenone_3">none</button>
-            <button onclick="btn_4()" type="button" id="togglenone_4">none</button>
+            <button onclick="window.location.href='/main'" class="changeForm_01" type="button"
+                id="togglenone_1">none</button>
+            <button onclick="window.location.href='/none2'" type="button" id="togglenone_2">none</button>
+            <button onclick="window.location.href='/none3'" type="button" id="togglenone_3">none</button>
+            <button onclick="window.location.href='/none4'" type="button" id="togglenone_4">none</button>
 
         </div>
-        <div class='test'>
-            <!-- 쓰지않는부분
-            <p>Welcome to Class B 10 Team Project</p> -->
-        </div>
+        
 
+        <!-- 창민님 .html  -->
+        
         <div id="interface_form" class="hide">
+            <h1 class="text-center mt-3">Sparta Apartment Free Board!</h1>
+
+  <table class="table table-hover table-striped text-center container mt-3">
+    <thead class="table-danger">
+      <tr>
+        <th>번호</th>
+        <th>글쓴이</th>
+        <th>내용</th>
+        <th>삭제</th>
+        <th>수정</th>
+      </tr>
+    </thead>
+
+    <tbody id="comment-list">
+      <!-- {% for i in data_list %}
+      <tr>
+        <td>{{ i[0] }}</td>
+        <td>{{ i[1] }}</td>
+        <td>{{ i[2] }}</td>
+        <td>{{ i[3] }}</td>
+      </tr>
+      {% endfor %} -->
+    </tbody>
+  </table>
+
+  <hr class="container">
+
+  <div class="container post-write w-50">
+    <form>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label mt-3">이름</label>
+        <input type="text" class="form-control" aria-describedby="emailHelp" id="name">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">내용</label>
+        <input type="text" class="form-control" id="comment">
+      </div>
+      <div class="col">
+        <button onclick="save_comment()" type="button" class="btn btn-primary col-2" >Submit</button>
+        <button type="button" class="btn btn-danger col-2 float-end close">Close</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="container post-correction w-75">
+    <form>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="correction-comment" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">내용을 수정하세요.</div>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-danger float-end correction-close">닫기</button>
+      </div>
+    </form>
+  </div>
+
+  <div>
+    <ul class="pagination justify-content-center">
+      <li><a href="#" style="margin-right: 5px;" class="text-secondary">◀</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary" id="page-1">1</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary" id="page-2">2</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary" id="page-3">3</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary" id="page-4">4</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary" id="page-5">5</a></li>
+      <li><a type="button" style="margin-right: 5px;" class="text-secondary">▶</a></li>
+    </ul>
+  </div>
+
+  <div class="container btn-write">
+    <a class="btn btn-outline-dark float-end">글쓰기</a>
+  </div>
+
+  <div class="container">
+    <a class="btn btn-warning correction-show" style="color: white; font-weight: bold;">글 수정하기</a>
+  </div>
+
+  <script>
+
+    // 페이지 시작, 새로고침 시 작동 --------------------
+    $(document).ready( () => { 
+      let pagenumber = localStorage.getItem('pagenumber')
+      if(!pagenumber) {
+        reload_comment(1)
+      }
+      reload_comment(parseInt(pagenumber))
+    })
+    //---------------------------------------------
+
+    // 버튼 클릭 시 값을 localstorage 변수에 저장 ------------------------
+    $('#page-1').on('click', () => {
+      localStorage.setItem('pagenumber', 1)
+      reload_comment(1)
+    })
+    $('#page-2').on('click', () => {
+      localStorage.setItem('pagenumber', 2)
+      reload_comment(2)
+    })
+    $('#page-3').on('click', () => {
+      localStorage.setItem('pagenumber', 3)
+      reload_comment(3)
+    })
+    $('#page-4').on('click', () => {
+      localStorage.setItem('pagenumber', 4)
+      reload_comment(4)
+    })
+    $('#page-5').on('click', () => {
+      localStorage.setItem('pagenumber', 5)
+      reload_comment(5)
+    })
+    //----------------------------------------------------------------
+
+    // GET - 게시글 불러오기
+    function reload_comment(parameter) {
+        $.ajax({
+            type: "GET",
+            url: `/comment/${parameter}`,
+            data: {},
+            success: function (response) {
+                doc = response['data_list']
+                $('#comment-list').empty()
+
+                for (let i = 0; i < doc.length; i++) {
+                    let id = doc[i][0]
+                    let name = doc[i][1]
+                    let comment = doc[i][2]
+                    let 템플릿 = `<tr>
+                                  <td>${id}</td>
+                                  <td>${name}</td>
+                                  <td>${comment}</td>
+                                  <td><button type="button" class="btn btn-danger delete" data-id="${id}" style="height: 35px;">삭제</button></td>
+                                  <td><button type="button" class="btn btn-warning correction" style="height: 35px;" data-id="${id}">수정</button></td>
+                                </tr>`
+                    $('#comment-list').append(템플릿)
+
+                    // DELETE - 게시글 삭제하기 --------------------
+                    $('.delete').on('click', function(e) {
+                      let 글번호 = e.target.dataset.id
+
+                      $.ajax({
+                        method : 'DELETE',
+                        url : '/delete',
+                        data : { id : 글번호 },
+                        success: function (response) {
+                            alert(response['msg'])
+                            window.location.reload()
+                        }
+                      })
+                    })
+                    //------------------------------------------
+
+                    // PUT = 게시글 수정하기 ----------------------
+                    $('.correction-show').on('click', () => $('.post-correction').fadeIn(1000) ) // 수정 게시판 show
+
+                    $('.correction-close').on('click', () => $('.post-correction').fadeOut(1000) ) // 수정 게시판 hide
+
+                    $('.correction').on('click', function(e) {
+                      let 글번호 = e.target.dataset.id
+                      let correction = $('#correction-comment').val()
+
+                      $.ajax({
+                        method : 'PUT',
+                        url : '/put',
+                        data : { id : 글번호, correction_give : correction },
+                        success: function (response) {
+                            alert(response['msg'])
+                            window.location.reload()
+                        }
+                      })
+                    })
+
+                }
+            }
+        });
+    }
+
+    // POST - 게시글 저장하기
+    function save_comment() {
+      let name = $('#name').val()
+      let comment = $('#comment').val()
+
+      $.ajax({
+          type: 'POST',
+          url: '/save_comment',
+          data: {name_give: name, comment_give: comment},
+          success: function (response) {
+              alert(response['msg'])
+              window.location.reload()
+          }
+      })
+    }
+
+    $('.btn-write').on('click', () =>  $('.post-write').fadeIn(1000) )  // 글쓰기 버튼 클릭 시 write창 보여짐
+
+    $('.close').on('click', () => $('.post-write').fadeOut(1000) )  // 닫힘 버튼 클릭 시 write창 사라짐
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+  crossorigin="anonymous"></script>
         </div>
 
     </div>
@@ -211,52 +408,6 @@
             <span>Copyright ©2022 second project. All rights reserved.</span>
         </p>
     </footer>
-    <script>
-
-        // 홈 버튼 누를때 hide
-
-        // $('.changeForm_01').on('click', () => $('.menuform_01').fadeIn(1000)) // 수정 게시판 show
-
-        // $('.changeForm_01').on('click', () => $('.menuform_01').fadeOut(1000)) // 수정 게시판 hide
-
-        // const home_btn = document.querySelector('#togglehome')
-        // const none_1_btn = document.querySelector('#togglenone_1');
-        // const none_2_btn = document.querySelector('#togglenone_2');
-        // const none_3_btn = document.querySelector('#togglenone_3');
-        // const none_4_btn = document.querySelector('#togglenone_4');
-
-        // const home_form = document.querySelector('#')
-        // const none_1_form = document.querySelector('#interface_form_01');
-        // const none_2_form = document.querySelector('#interface_form_02');
-        // const none_3_form = document.querySelector('#interface_form_03');
-        // const none_4_form = document.querySelector('#interface_form_04');
-
-
-        // const changeForm = (form1, form2, form3, form4) => {
-        //     form1.classList.toggle('#hide');
-        //     form2.classList.toggle('#hide');
-        //     form3.classList.toggle('#hide');
-        //     form4.classList.toggle('#hide');
-        // }
-
-
-        // none_1_btn.addEventListener('click', () => {
-        //     changeForm(none_1_form, none_2_form, none_3_form, none_4_form);
-        // });
-
-
-        // none_2_btn.addEventListener('click', () => {
-        //     changeForm(none_1_form, none_2_form, none_3_form, none_4_form);
-        // });
-
-        // none_3_btn.addEventListener('click', () => {
-        //     changeForm(none_1_form, none_2_form, none_3_form, none_4_form);
-        // });
-
-        // none_4_btn.addEventListener('click', () => {
-        //     changeForm(none_1_form, none_2_form, none_3_form, none_4_form);
-        // });
-    </script>
 </body>
 
 </html>
