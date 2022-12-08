@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session,jsonify
 import pymysql
-import json
+
 # import hashlib
 
 app = Flask(__name__)
