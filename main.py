@@ -219,8 +219,7 @@ def comment_post():
     db.close()
     return jsonify({'msg': '게시글 전송 완료!'})
 
-# DELETE 구현
-
+# 게시글 DELETE 구현
 
 @app.route("/delete", methods=["DELETE"])
 def comment_delete():
@@ -247,14 +246,6 @@ def comment_delete():
         else :
             return jsonify({'msg': '타인의 글은 삭제할 수 없습니다.'})
 
-
-
-        #다음을 실행
-        # id_receive = request.form['id']
-        # sql = f'''DELETE FROM pagination
-        #             WHERE id = {id_receive};'''
-        # cursor.execute(sql)
-
     db.commit()
     db.close()
     return jsonify({'msg': '게시글 삭제!'})
@@ -272,19 +263,25 @@ def comment_put():
                          charset='utf8')
     cursor = db.cursor()
 
+    if "username" in session:      # 로그인 후, 세션안에 유저네임 이 있으면
+        aaa = session["id"]             # 해당 유저의 아이디에 따라 생성된 값을 변수에 저장하고
+        id_receive = request.form['id'] # 선택한 게시글의 db를 조회하고
+        sql = f'''SELECT secret FROM pagination WHERE id = {id_receive}'''
+        cursor.execute(sql)
+        a = cursor.fetchone()
 
-
-
-    id_receive = request.form['id']
-    correction_receive = request.form['correction_give']
-    sql = f'''UPDATE pagination
-            SET comment = '{correction_receive}'
-            WHERE id = {id_receive};'''
-    cursor.execute(sql)
-
-    db.commit()
-    db.close()
-    return jsonify({'msg': '게시글 수정 완료!'})
+        if str(aaa) == str(a[0]):     # 게시글에 같이 저장된 (pagination 테이블의) secret 컬럼 값이 동일하면 해당 게시글 삭제가 되는 다음 구문을 실행합니다.
+            id_receive = request.form['id']
+            correction_receive = request.form['correction_give']
+            sql = f'''UPDATE pagination
+                    SET comment = '{correction_receive}'
+                    WHERE id = {id_receive};'''
+            cursor.execute(sql)
+            db.commit()
+            db.close()
+            return jsonify({'msg': '게시글 수정 완료!'})
+        else :
+            return jsonify({'msg': '타인의 글은 수정할 수 없습니다.'})
 
 
 # 파일업로드 HTML
