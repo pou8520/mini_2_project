@@ -23,9 +23,10 @@
 </head>
 
 <body topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
-  <header>
+<header>
     <h2><a href="/main" ;>Apartment</a></h2>
     <div>
+<<<<<<< HEAD
       <nav>
         {% include 'navbar.html' %}
         <div class='container'>
@@ -33,8 +34,17 @@
           {% endblock %}
         </div>
       </nav>
+=======
+        <nav>
+            {% include 'navbar.html' %}
+            <div class='container'>
+                {% block contetn %}
+                {% endblock %}
+            </div>
+        </nav>
+>>>>>>> a45689b54e77dbc5756c0ec6c32172d8c41e03fc
     </div>
-  </header>
+</header>
   <div class="background_form">
     <div class="btn_form">
       <button onclick="window.location.href='/main'" class="changeForm_01" type="button" id="togglenone_1">none</button>
