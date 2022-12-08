@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-from flask import Flask, render_template, request, session,jsonify
-import pymysql
-=======
 from flask import Flask, render_template, request, session
 from flask import redirect, send_file, url_for, jsonify  #김재광 추가
 from werkzeug.utils import secure_filename
@@ -10,8 +6,6 @@ import pymysql
 import os
 
 import json
-
->>>>>>> a45689b54e77dbc5756c0ec6c32172d8c41e03fc
 
 # import hashlib
 
@@ -54,10 +48,6 @@ def main_page():
     else:  # 세션이 존재하지 않는 경우
         return redirect(url_for("login_btn"))  # 세션안에 정보가 없어서(혹은 브라우저를 나가면 세션이 삭제) 로그인 페이지로 redirect
 
-
-
-
-    #return render_template('index.html')
 
 #회원정보(회원 프로필)
 @app.route('/profile')
@@ -142,7 +132,6 @@ def logout():
 
 
 # 회원가입 기능
-
 @app.route("/signup", methods=["POST"])
 def signup_btn_click():
 
@@ -162,8 +151,8 @@ def signup_btn_click():
     return jsonify({'msg': '회원가입 완료!'})
 
 
-## 창민님 .py
-
+### 게시글 작성###
+# 페이지 네이션
 @app.route("/comment/<int:page_id>", methods=["GET"])
 def comment_get(page_id):
     db = pymysql.connect(host='secendproj.cczokkdg0lti.ap-northeast-1.rds.amazonaws.com',
@@ -196,9 +185,7 @@ def comment_get(page_id):
     db.close()
     return jsonify({'data_list': data_list})
 
-# POST 구현
-
-
+#게시글 작성
 @app.route("/save_comment", methods=["POST"])
 def comment_post():
     db = pymysql.connect(host='secendproj.cczokkdg0lti.ap-northeast-1.rds.amazonaws.com',
@@ -209,19 +196,23 @@ def comment_post():
                          charset='utf8')
     cursor = db.cursor()
 
-    name_receive = request.form['name_give']
-    comment_receive = request.form['comment_give']
-    sql = f'''INSERT INTO pagination(name, comment)
-            VALUES('{name_receive}', '{comment_receive}');'''
-    cursor.execute(sql)
+    if  "username" in session:
+        username = session["username"]
+        id = session['id']
+        name_receive = username
+        comment_receive = request.form['comment_give']
+        id_receive = id
+        sql = f'''INSERT INTO pagination(name, comment, secret)
+                VALUES('{name_receive}', '{comment_receive}', '{id_receive}');'''
+        cursor.execute(sql)
+    else :
+        return redirect(url_for("login_btn"))  # login_btn 함수가 있는 url페이지로 리디렉션을 반환
 
     db.commit()
     db.close()
     return jsonify({'msg': '게시글 전송 완료!'})
 
-# DELETE 구현
-
-
+# 게시글 삭제
 @app.route("/delete", methods=["DELETE"])
 def comment_delete():
     db = pymysql.connect(host='secendproj.cczokkdg0lti.ap-northeast-1.rds.amazonaws.com',
@@ -232,18 +223,28 @@ def comment_delete():
                          charset='utf8')
     cursor = db.cursor()
 
-    id_receive = request.form['id']
-    sql = f'''DELETE FROM pagination
-            WHERE id = {id_receive};'''
-    cursor.execute(sql)
+    if "username" in session:      # 로그인 후, 세션안에 유저네임 이 있으면
+        aaa = session["id"]             # 해당 유저의 아이디에 따라 생성된 값을 변수에 저장하고
+        id_receive = request.form['id'] # 선택한 게시글의 db를 조회하고
+        sql = f'''SELECT secret FROM pagination WHERE id = {id_receive}'''
+        cursor.execute(sql)
+        a = cursor.fetchone()
+
+        if str(aaa) == str(a[0]):     # 게시글에 같이 저장된 (pagination 테이블의) secret 컬럼 값이 동일하면
+            id_receive = request.form['id']     # 해당 게시글 삭제가 되는 다음 구문을 실행합니다.
+            sql = f'''DELETE FROM pagination
+                                WHERE id = {id_receive};'''
+            cursor.execute(sql)
+        else :
+            return jsonify({'msg': '타인의 글은 삭제할 수 없습니다.'})
 
     db.commit()
     db.close()
     return jsonify({'msg': '게시글 삭제!'})
 
-# PUT 구현
 
 
+# 게시글 수정
 @app.route("/put", methods=["PUT"])
 def comment_put():
     db = pymysql.connect(host='secendproj.cczokkdg0lti.ap-northeast-1.rds.amazonaws.com',
@@ -254,16 +255,27 @@ def comment_put():
                          charset='utf8')
     cursor = db.cursor()
 
-    id_receive = request.form['id']
-    correction_receive = request.form['correction_give']
-    sql = f'''UPDATE pagination
-            SET comment = '{correction_receive}'
-            WHERE id = {id_receive};'''
-    cursor.execute(sql)
+    if "username" in session:      # 로그인 후, 세션안에 유저네임 이 있으면
+        aaa = session["id"]             # 해당 유저의 아이디에 따라 생성된 값을 변수에 저장하고
+        id_receive = request.form['id'] # 선택한 게시글의 db를 조회하고
+        sql = f'''SELECT secret FROM pagination WHERE id = {id_receive}'''
+        cursor.execute(sql)
+        a = cursor.fetchone()
 
-    db.commit()
-    db.close()
-    return jsonify({'msg': '게시글 수정 완료!'})
+        if str(aaa) == str(a[0]):     # 게시글에 같이 저장된 (pagination 테이블의) secret 컬럼 값이 동일하면 해당 게시글 삭제가 되는 다음 구문을 실행합니다.
+            id_receive = request.form['id']
+            correction_receive = request.form['correction_give']
+            sql = f'''UPDATE pagination
+                    SET comment = '{correction_receive}'
+                    WHERE id = {id_receive};'''
+            cursor.execute(sql)
+            db.commit()
+            db.close()
+            return jsonify({'msg': '게시글 수정 완료!'})
+        else :
+            return jsonify({'msg': '타인의 글은 수정할 수 없습니다.'})
+    return redirect(url_for("none1_page"))
+
 
 
 # 파일업로드 HTML
@@ -306,7 +318,6 @@ def download_file():
         except:
             print("download error")
     return render_template('download.html', files=files_list)
-
 
 
 if __name__ == '__main__':
