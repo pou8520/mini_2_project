@@ -14,7 +14,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Diplomata+SC&family=Satisfy&display=swap');
     </style>
-    <link rel="stylesheet" href="static\styles\main.css">
+    <link rel="stylesheet" href="static\styles\nonebtns.css">
     <title></title>
     <style>
         body {
@@ -155,10 +155,6 @@
             border-radius: 20px;
             border: 0
         }
-
-        .hide {
-            display: none !important;
-        }
     </style>
 </head>
 
@@ -167,59 +163,42 @@
         <h2><a href="/main" ;>Apartment</a></h2>
         <div>
             <nav>
-                {% include 'navbar.html' %}
-                <div class ='container'>
-                    {% block contetn %}
-                    {% endblock %}
-                </div>
+                <ul>
+                    <li>
+                        <a type="button" id="togglehome" href="/main" ;>홈</a>
+                    </li>
+                    <li>
+                        <a href="index.html" ;>회원정보</a>
+                    </li>
+                    <li>
+                        <a type="button" onclick="logout()" href="/" ;>로그아웃</a>
+                    </li>
+                </ul>
             </nav>
         </div>
     </header>
     <div class="background_form">
         <div class="btn_form">
-<<<<<<< HEAD
-            <button onclick="btn_1()" class="changeForm_01" type="button" id="togglenone_1">none</button>
-            <button onclick="btn_2()" type="button" id="togglenone_2">none</button>
-            <button onclick="btn_3()" type="button" id="togglenone_3">none</button>
-            <button onclick="location.href='https://www.realtyprice.kr/notice/town/nfSiteLink.htm'" id="togglenone_4">공시지가</button>
-        </div>
-        <div class='test'>
-            <!-- 쓰지않는부분
-            <p>Welcome to Class B 10 Team Project</p> --> 
-            
-        </div>
-        <form id="interface_form" class="hide">
-            <div class= "first">
-                <div class="one"> haha</div>
-                <div class="one"> haha1</div>
-            </div>
-            <div class= "second">
-            <div class="one"> haha2</div>
-            <div class="one"> haha3</div>
-            <div>
-        </form>
-    </div>
-    </div>
-=======
             <button onclick="window.location.href='/none1'" class="changeForm_01" type="button"
                 id="togglenone_1">none</button>
-            <button onclick="window.location.href='/none2'" type="button" id="togglenone_2">none</button>
+            <button onclick="window.location.href='/main'" type="button" id="togglenone_2">none</button>
             <!-- <button onclick="window.location.href='/none3'" type="button" id="togglenone_3">none</button>
-            <button onclick="window.location.href='/none4'" type="button" id="togglenone_4">none</button> -->
+      <button onclick="window.location.href='/none4'" type="button" id="togglenone_4">none</button> -->
+
         </div>
 
-        <!-- <div class='test'>
-             쓰지않는부분
-            <p>Welcome to Class B 10 Team Project</p> 
-        </div> -->
+
+
+
         <div id="interface_form" class="hide">
-            
-        </div>
->>>>>>> b24089615942cbbf83cf3daf68bcb418cd557254
 
+        </div>
 
     </div>
 
+
+
+    </div>
     <footer>
         <nav>
             <a href='' target='_blank'>Blog</a> |
@@ -230,52 +209,6 @@
             <span>Copyright ©2022 second project. All rights reserved.</span>
         </p>
     </footer>
-    <script>
-
-        // 홈 버튼 누를때 hide
-
-        // $('.changeForm_01').on('click', () => $('.menuform_01').fadeIn(1000)) // 수정 게시판 show
-
-        // $('.changeForm_01').on('click', () => $('.menuform_01').fadeOut(1000)) // 수정 게시판 hide
-
-        // const home_btn = document.querySelector('#togglehome')
-        // const none_1_btn = document.querySelector('#togglenone_1');
-        // const none_2_btn = document.querySelector('#togglenone_2');
-        // const none_3_btn = document.querySelector('#togglenone_3');
-        // const none_4_btn = document.querySelector('#togglenone_4');
-
-        // const home_form = document.querySelector('#')
-        // const none_1_form = document.querySelector('#interface_form_01');
-        // const none_2_form = document.querySelector('#interface_form_02');
-        // const none_3_form = document.querySelector('#interface_form_03');
-        // const none_4_form = document.querySelector('#interface_form_04');
-
-
-        // const changeForm = (form1, form2, form3, form4) => {
-        //     form1.classList.toggle('#hide');
-        //     form2.classList.toggle('#hide');
-        //     form3.classList.toggle('#hide');
-        //     form4.classList.toggle('#hide');
-        // }
-
-
-        // none_1_btn.addEventListener('click', () => {
-        //     changeForm(none_1_form, none_2_form, none_3_form, none_4_form);
-        // });
-
-
-        // none_2_btn.addEventListener('click', () => {
-        //     changeForm(none_1_form, none_2_form, none_3_form, none_4_form);
-        // });
-
-        // none_3_btn.addEventListener('click', () => {
-        //     changeForm(none_1_form, none_2_form, none_3_form, none_4_form);
-        // });
-
-        // none_4_btn.addEventListener('click', () => {
-        //     changeForm(none_1_form, none_2_form, none_3_form, none_4_form);
-        // });
-    </script>
 </body>
 
 </html>

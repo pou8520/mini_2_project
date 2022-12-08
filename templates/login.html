@@ -26,7 +26,7 @@
                     <input type="password" name="password" id="password" placeholder="비밀번호">
 
                     <div id="btn_1">
-                        <button type="submit" onclick=login_click()>로그인</button>
+                        <button type="submit" onclick="login_click();">로그인</button>
                         <div class='solid_line'></div>
                         <button onclick="window.location.href='/signup'" type="button" id="signup_btn">회원가입</button>
                     </div>
@@ -36,9 +36,9 @@
     </div>
     <script>
         function login_click() {
+            console.log(login_click)
             const user_name = document.querySelector('#username')
             const user_password = document.querySelector('#password')
-
             let name_2 = $('#username').val()
             let pw_2 = $('#password').val()
 
@@ -56,6 +56,8 @@
             if (user_name.value == "" || user_password.value == "") {
                 alert("빈칸을 입력해주세요")
                 window.location.reload
+            }else{
+                window.location.href='/main'
             }
         }
     </script>
